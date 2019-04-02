@@ -100,9 +100,10 @@ type ActionType string
 
 // ActionType values
 const (
-	Reply   = ActionType("reply")
-	OpenURL = ActionType("open-url")
-	None    = ActionType("none")
+	Reply     = ActionType("reply")
+	OpenURL   = ActionType("open-url")
+	None      = ActionType("none")
+	SharePhoe = ActionType("share-phone")
 )
 
 // TextVAlign for carousel buttons
