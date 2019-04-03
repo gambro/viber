@@ -29,6 +29,12 @@ type Message interface {
 	SetKeyboard(k *Keyboard)
 }
 
+// Contact structure
+type Contact struct {
+	Name        string `json:"name"`
+	PhoneNumber string `json:"phone_number,omitempty"`
+}
+
 // TextMessage for Viber
 type TextMessage struct {
 	Receiver      string      `json:"receiver,omitempty"`
@@ -65,6 +71,12 @@ type VideoMessage struct {
 	Thumbnail string `json:"thumbnail,omitempty"`
 	Size      uint   `json:"size"`
 	Duration  uint   `json:"duration,omitempty"`
+}
+
+// ContactMessage structure
+type ConctactMessage struct {
+	TextMessage
+	Contact Contact `json:"contact"`
 }
 
 // MessageType for viber messaging
@@ -109,9 +121,10 @@ func (v *Viber) sendMessage(url string, m interface{}) (msgToken uint64, err err
 // NewTextMessage viber
 func (v *Viber) NewTextMessage(msg string) *TextMessage {
 	return &TextMessage{
-		Sender: v.Sender,
-		Type:   TypeTextMessage,
-		Text:   msg,
+		MinAPIVersion: 3,
+		Sender:        v.Sender,
+		Type:          TypeTextMessage,
+		Text:          msg,
 	}
 }
 
