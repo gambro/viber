@@ -54,7 +54,9 @@ type TextMessage struct {
 // URLMessage structure
 type URLMessage struct {
 	TextMessage
-	Media string `json:"media"`
+	Media    string `json:"media"`
+	Size     uint   `json:"size"`
+	FileName string `json:"file_name"`
 }
 
 // PictureMessage structure
@@ -62,6 +64,8 @@ type PictureMessage struct {
 	TextMessage
 	Media     string `json:"media"`
 	Thumbnail string `json:"thumbnail,omitempty"`
+	Size      uint   `json:"size"`
+	FileName  string `json:"file_name"`
 }
 
 // VideoMessage structure
