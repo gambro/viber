@@ -77,6 +77,13 @@ type VideoMessage struct {
 	Duration  uint   `json:"duration,omitempty"`
 }
 
+type FileMessage struct {
+	TextMessage
+	Media    string `json:"media"`
+	Size     uint   `json:"size"`
+	FileName string `json:"file_name"`
+}
+
 // ContactMessage structure
 type ConctactMessage struct {
 	TextMessage
@@ -154,6 +161,28 @@ func (v *Viber) NewPictureMessage(msg string, url string, thumbURL string) *Pict
 		},
 		Media:     url,
 		Thumbnail: thumbURL,
+	}
+}
+
+func (v *Viber) NewVideoMessage(url, thumbURL string) *VideoMessage {
+	return &VideoMessage{
+		TextMessage: TextMessage{
+			Sender: v.Sender,
+			Type:   TypeVideoMessage,
+		},
+		Media:     url,
+		Thumbnail: thumbURL,
+	}
+}
+
+func (v *Viber) NewFileMessage(url, fileName string) *FileMessage {
+	return &FileMessage{
+		TextMessage: TextMessage{
+			Sender: v.Sender,
+			Type:   TypeFileMessage,
+		},
+		FileName: fileName,
+		Media:    url,
 	}
 }
 
